@@ -36,14 +36,21 @@ if (DEBUG_MODE) {
     ini_set('display_errors', 0);
 }
 
-// Session Configuration
+// Session Configuration (MUST be before session_start())
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_strict_mode', 1);
 ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) ? 1 : 0);
+ini_set('session.cookie_samesite', 'Strict');
 
 // Load Database Config
 $db_config = require_once __DIR__ . '/database.php';
 define('DB_CONFIG', $db_config);
+
+// Start Session (after ini_set configurations)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Autoloader
 spl_autoload_register(function ($class) {

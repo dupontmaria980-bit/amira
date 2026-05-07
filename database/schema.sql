@@ -171,9 +171,17 @@ CREATE TABLE IF NOT EXISTS `analytics` (
 -- ========================================
 -- INSERT DEFAULT ADMIN USER
 -- ========================================
--- Password: admin123 (hashed with password_hash in PHP)
+-- Password: admin123 (hashed with bcrypt)
+-- IMPORTANT: Si le mot de passe ne fonctionne pas, exécutez reset-admin-password.php
+-- Hash généré avec: password_hash('admin123', PASSWORD_BCRYPT)
 INSERT INTO `admins` (`username`, `email`, `password_hash`, `full_name`, `permissions`) VALUES
-('admin', 'admin@humanitarian.org', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', '{"manage_users": true, "manage_donations": true, "manage_testimonials": true, "view_analytics": true}');
+('admin', 'admin@humanitarian.org', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', '{\"manage_users\": true, \"manage_donations\": true, \"manage_testimonials\": true, \"view_analytics\": true}');
+
+-- ========================================
+-- ALTERNATIVE: Hash simple pour test (à utiliser si le hash ci-dessus ne fonctionne pas)
+-- Décommentez la ligne ci-dessous et commentez la ligne du dessus si nécessaire
+-- ========================================
+-- UPDATE `admins` SET `password_hash` = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' WHERE `username` = 'admin';
 
 -- ========================================
 -- INSERT SAMPLE TESTIMONIALS

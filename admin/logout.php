@@ -3,7 +3,7 @@
  * Admin Logout - Humanitarian Platform 2026
  */
 
-session_start();
+
 require_once __DIR__ . '/../config/config.php';
 
 // Log activity
