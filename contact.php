@@ -3,7 +3,7 @@
  * Contact Page - Humanitarian Platform 2026
  */
 
-session_start();
+
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/Database.php';
 
